@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!-- Portfolio website - Style 10: Rail -->
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nittin S | Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ===== THE RAIL ON THE LEFT (it fills up while you scroll) ===== -->
+  <aside class="rail">
+    <div class="rail-line"><span class="rail-fill" id="railFill"></span></div>
+
+    <div class="rail-dots" id="railDots">
+      <a href="#about" data-section="about"><i></i><b>01 About</b></a>
+      <a href="#skills" data-section="skills"><i></i><b>02 Skills</b></a>
+      <a href="#work" data-section="work"><i></i><b>03 Work</b></a>
+      <a href="#contact" data-section="contact"><i></i><b>04 Contact</b></a>
+    </div>
+  </aside>
+
+  <!-- ===== TOP MENU ===== -->
+  <header class="nav">
+    <div class="nav-in">
+      <a href="#top" class="logo">Nittin S</a>
+
+      <nav class="links" id="menu">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn">Menu</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+
+      <div class="col-label">
+        <p class="label">Portfolio &mdash; 2026</p>
+      </div>
+
+      <div class="col-main hero-grid">
+
+        <div>
+          <!-- JavaScript turns this name into separate letters -->
+          <h1 id="nameText">Nittin S</h1>
+
+          <p class="role">B.Sc. Computer Science Student &middot; Future Cloud Engineer</p>
+
+          <p class="lead">
+            I am a second-year student at KG College of Arts and Science,
+            Coimbatore. I like solving coding problems and building practical
+            applications, and I want to become a cloud engineer.
+          </p>
+
+          <div class="hero-links">
+            <a class="btn" href="#work">See my work</a>
+            <a class="plain" href="#contact">Get in touch &rarr;</a>
+          </div>
+        </div>
+
+        <!-- the photo. A coloured panel slides off it when you scroll here -->
+        <figure class="shot" id="shot">
+          <span class="initials">NS</span>
+          <img src="images/photo.jpg" alt="Photo of Nittin S wearing a black blazer and white shirt" onerror="this.style.display='none'">
+          <span class="curtain"></span>
+          <figcaption>Coimbatore, India</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+      <div class="col-label"><p class="label">01 &mdash; About</p></div>
+
+      <div class="col-main">
+        <p class="statement">
+          I like solving coding problems and building practical applications.
+          My goal is to become a cloud engineer.
+        </p>
+
+        <div class="two-col">
+          <p>
+            I am a second-year B.Sc. Computer Science student at KG College of
+            Arts and Science. I am interested in programming, web development
+            and design.
+          </p>
+          <p>
+            I want to learn how to build, deploy and manage applications using
+            cloud technologies.
+          </p>
+        </div>
+
+        <ul class="facts">
+          <li><b>03</b><span>Projects built</span></li>
+          <li><b>06</b><span>Languages and web skills</span></li>
+          <li><b>2nd</b><span>Year of B.Sc.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+      <div class="col-label"><p class="label">02 &mdash; Skills</p></div>
+
+      <div class="col-main">
+        <div class="skills">
+          <div class="skill"><b>HTML</b><span>Page structure</span></div>
+          <div class="skill"><b>CSS</b><span>Layout and design</span></div>
+          <div class="skill"><b>JavaScript</b><span>Interactivity on the page</span></div>
+          <div class="skill"><b>Java</b><span>Employee Management project</span></div>
+          <div class="skill"><b>Python</b><span>Programming</span></div>
+          <div class="skill"><b>C</b><span>Contact Book project</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WORK: click a name, the panel changes ===== -->
+    <section id="work">
+      <div class="col-label"><p class="label">03 &mdash; Work</p></div>
+
+      <div class="col-main">
+        <div class="work">
+
+          <div class="names" id="names">
+            <button class="name on"
+                    data-no="01"
+                    data-title="Movie Ticket Booking"
+                    data-text="A website for booking movie tickets online. Users can select their seats, pay online, and see the most popular movies that are currently showing."
+                    data-points="Select your seats|Pay online|See popular movies"
+                    data-tech="HTML|CSS|JavaScript"
+                    data-year="Student project"
+                    data-link="https://github.com/nittin7">
+              Movie Ticket Booking
+            </button>
+
+            <button class="name"
+                    data-no="02"
+                    data-title="Employee Management"
+                    data-text="A Java program that stores and manages employee records."
+                    data-points="Written in Java|Stores employee records|Manages employee details"
+                    data-tech="Java"
+                    data-year="Student project"
+                    data-link="https://github.com/nittin7">
+              Employee Management
+            </button>
+
+            <button class="name"
+                    data-no="03"
+                    data-title="Contact Book"
+                    data-text="A C program that saves and finds contacts."
+                    data-points="Written in C|Saves contacts|Finds contacts"
+                    data-tech="C"
+                    data-year="Student project"
+                    data-link="https://github.com/nittin7">
+              Contact Book
+            </button>
+          </div>
+
+          <!-- JavaScript writes everything inside this panel -->
+          <article class="panel" id="panel">
+            <p class="panel-no" id="pNo">01</p>
+            <h3 id="pTitle">Movie Ticket Booking</h3>
+            <p class="panel-text" id="pText"></p>
+            <ul class="points" id="pPoints"></ul>
+            <div class="tags" id="pTech"></div>
+            <div class="panel-foot">
+              <span id="pYear">Student project</span>
+              <a id="pLink" href="#" target="_blank" rel="noopener">View my GitHub &rarr;</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <div class="col-label"><p class="label">04 &mdash; Contact</p></div>
+
+      <div class="col-main">
+        <div class="contact">
+
+          <form id="contactForm">
+
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your name">
+
+            <label for="email">Email</label>
+            <input type="text" id="email" placeholder="name@gmail.com">
+            <!-- JavaScript writes a live message here while you type -->
+            <p class="hint" id="emailHint">Use a Gmail, Outlook, iCloud or Yahoo address.</p>
+
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" placeholder="Write your message"></textarea>
+
+            <!-- the button stays switched off until the email is correct -->
+            <button type="submit" class="btn" id="sendBtn" disabled>Send message</button>
+
+            <p id="formMsg"></p>
+          </form>
+
+          <!-- LinkedIn: replace the link below with your own profile address -->
+          <div class="accounts">
+            <a href="https://github.com/nittin7" target="_blank" rel="noopener">
+              <span>GitHub</span><i>@nittin7</i>
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener">
+              <span>LinkedIn</span><i>Nittin S</i>
+            </a>
+            <a href="mailto:snittin08@gmail.com">
+              <span>Email</span><i>snittin08@gmail.com</i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Nittin S</p>
+    <p>Built with HTML, CSS and JavaScript</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

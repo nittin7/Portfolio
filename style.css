@@ -1,0 +1,798 @@
+/* ============================================
+   Style 10: Rail
+   Paper colours, a strict two column grid,
+   and a scroll rail down the left side
+   ============================================ */
+
+/* ---- 1. Reset ---- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---- 2. Colours kept in one place ---- */
+:root {
+  --paper: #f1eee8;
+  --ink: #15161a;
+  --grey: #6c6b67;
+  --line: #dcd7cd;
+  --card: #f8f6f2;
+  --clay: #b4432a;
+  /* the only accent colour */
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* one width for the whole page, so every edge lines up */
+.nav-in,
+main,
+footer {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* ---- 3. The rail on the left ---- */
+.rail {
+  position: fixed;
+  left: 34px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: stretch;
+  gap: 18px;
+}
+
+/* the thin track, and the part of it that fills in */
+.rail-line {
+  position: relative;
+  width: 2px;
+  background-color: var(--line);
+}
+
+.rail-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--clay);
+}
+
+.rail-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rail-dots a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+/* the small circle */
+.rail-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--line);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* the name of the section is hidden until it is the active one */
+.rail-dots b {
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.rail-dots a:hover b {
+  opacity: 0.6;
+  transform: translateX(0);
+}
+
+/* JavaScript adds "live" to the section you are looking at */
+.rail-dots a.live i {
+  background-color: var(--clay);
+  transform: scale(1.6);
+}
+
+.rail-dots a.live b {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--ink);
+}
+
+/* ---- 4. Top menu ---- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: rgba(241, 238, 232, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-in {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.logo {
+  font-weight: 600;
+  letter-spacing: -0.3px;
+}
+
+.links {
+  display: flex;
+  gap: 28px;
+  font-size: 15px;
+}
+
+.links a {
+  color: var(--grey);
+  transition: color 0.2s;
+}
+
+.links a:hover {
+  color: var(--clay);
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: 1px solid var(--line);
+  padding: 6px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* ---- 5. THE GRID. Every section uses the same two columns ---- */
+section {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 40px;
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+}
+
+.hero {
+  border-top: none;
+  padding-top: 70px;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding-top: 10px;
+}
+
+/* ---- 6. Hero ---- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 50px;
+  align-items: start;
+}
+
+h1 {
+  font-size: clamp(46px, 6.5vw, 82px);
+  line-height: 1;
+  letter-spacing: -3px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* every letter is its own box, so each one can move on its own */
+.char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  transition: opacity 0.5s, transform 0.5s, color 0.2s;
+}
+
+.char.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* put the mouse on a letter and only that letter jumps */
+h1:hover .char:hover {
+  color: var(--clay);
+  transform: translateY(-9px);
+}
+
+/* a space between the two words */
+.char.gap {
+  width: 0.3em;
+}
+
+.role {
+  color: var(--clay);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+.lead {
+  max-width: 430px;
+  color: var(--grey);
+  margin-bottom: 30px;
+}
+
+.hero-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 28px;
+  background-color: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.btn:hover {
+  background-color: var(--clay);
+  border-color: var(--clay);
+}
+
+.plain {
+  font-size: 15px;
+  color: var(--grey);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.plain:hover {
+  color: var(--clay);
+  border-color: var(--clay);
+}
+
+/* ---- 7. The photo (no flipping) ---- */
+.shot {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background-color: var(--card);
+  border: 1px solid var(--line);
+}
+
+.initials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  font-weight: 600;
+  color: var(--line);
+}
+
+.shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* the photo is grey until the mouse is on it */
+  filter: grayscale(100%);
+  transition: filter 0.6s, transform 0.9s;
+}
+
+.shot:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* the coloured panel that covers the photo at the start */
+.curtain {
+  position: absolute;
+  inset: 0;
+  background-color: var(--clay);
+  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* JavaScript adds "open", and the panel slides up and away */
+.shot.open .curtain {
+  transform: translateY(-101%);
+}
+
+.shot figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: 8px 14px;
+  background-color: var(--ink);
+  color: var(--paper);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  /* it slides in from the left when the mouse is on the photo */
+  transform: translateX(-100%);
+  transition: transform 0.4s;
+}
+
+.shot:hover figcaption {
+  transform: translateX(0);
+}
+
+/* ---- 8. About ---- */
+.statement {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.3;
+  letter-spacing: -1px;
+  margin-bottom: 34px;
+  max-width: 760px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  color: var(--grey);
+  margin-bottom: 44px;
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+.facts b {
+  display: block;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.facts span {
+  font-size: 13px;
+  color: var(--grey);
+}
+
+/* ---- 9. Skills ---- */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background-color: var(--line);
+  border: 1px solid var(--line);
+}
+
+.skill {
+  background-color: var(--paper);
+  padding: 22px 24px;
+  transition: background-color 0.25s, padding-left 0.25s;
+}
+
+.skill:hover {
+  background-color: var(--card);
+  padding-left: 32px;
+}
+
+.skill b {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.skill span {
+  font-size: 14px;
+  color: var(--grey);
+}
+
+/* ---- 10. Work ---- */
+.work {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+.names {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.name {
+  position: relative;
+  text-align: left;
+  font-family: inherit;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  padding: 18px 0 18px 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--grey);
+  cursor: pointer;
+  transition: color 0.25s, padding-left 0.25s;
+}
+
+/* a small line that grows out of the left edge */
+.name::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 1px;
+  background-color: var(--clay);
+  transition: width 0.25s;
+}
+
+.name:hover {
+  color: var(--ink);
+  padding-left: 26px;
+}
+
+.name:hover::before {
+  width: 16px;
+}
+
+/* JavaScript adds "on" to the one you clicked */
+.name.on {
+  color: var(--ink);
+  padding-left: 26px;
+}
+
+.name.on::before {
+  width: 16px;
+}
+
+.panel {
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  padding: 30px;
+}
+
+.panel-no {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--clay);
+  margin-bottom: 6px;
+}
+
+.panel h3 {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  margin-bottom: 12px;
+}
+
+.panel-text {
+  color: var(--grey);
+  margin-bottom: 18px;
+}
+
+.points {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.points li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  color: var(--grey);
+  margin-bottom: 5px;
+}
+
+/* a small square instead of a bullet */
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--clay);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.tags span {
+  font-size: 12px;
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  color: var(--grey);
+}
+
+.panel-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  font-size: 14px;
+  color: var(--grey);
+}
+
+.panel-foot a {
+  color: var(--clay);
+  font-weight: 500;
+}
+
+.panel-foot a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- 11. Contact ---- */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--grey);
+  margin: 16px 0 6px 0;
+}
+
+input,
+textarea {
+  font-family: inherit;
+  font-size: 16px;
+  padding: 12px 14px;
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  transition: border-color 0.25s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+/* JavaScript adds these two while you type the email */
+input.good {
+  border-color: #2e7d4f;
+}
+
+input.bad {
+  border-color: var(--clay);
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--grey);
+  margin-top: 6px;
+  min-height: 20px;
+}
+
+form .btn {
+  align-self: flex-start;
+  margin-top: 22px;
+}
+
+/* the switched off button */
+.btn:disabled {
+  background-color: var(--line);
+  border-color: var(--line);
+  color: #9a968d;
+  cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+  background-color: var(--line);
+  border-color: var(--line);
+}
+
+#formMsg {
+  font-size: 14px;
+  margin-top: 14px;
+  min-height: 20px;
+}
+
+.accounts {
+  align-self: start;
+  border-top: 1px solid var(--line);
+}
+
+.accounts a {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 2px;
+  border-bottom: 1px solid var(--line);
+  transition: padding-left 0.25s, color 0.2s;
+}
+
+.accounts a:hover {
+  color: var(--clay);
+  padding-left: 12px;
+}
+
+.accounts i {
+  font-style: normal;
+  font-size: 15px;
+  color: var(--grey);
+}
+
+/* ---- 12. Footer ---- */
+footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 26px;
+  padding-bottom: 50px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--grey);
+}
+
+/* ---- 13. The scroll transition: content wipes open from the left ---- */
+.wipe {
+  /* inset(top right bottom left): the right side is cut off at the start */
+  clip-path: inset(0 100% 0 0);
+  transform: translateY(14px);
+  transition: clip-path 1s cubic-bezier(0.76, 0, 0.24, 1), transform 1s;
+}
+
+.wipe.open {
+  clip-path: inset(0 0 0 0);
+  transform: translateY(0);
+}
+
+/* ---- 14. Tablet and phone ---- */
+@media (max-width: 1180px) {
+
+  /* the rail needs space beside the page, so it goes away on small screens */
+  .rail {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+
+  .nav-in,
+  main,
+  footer {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  /* one column everywhere */
+  section,
+  .hero-grid,
+  .two-col,
+  .work,
+  .contact {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  section {
+    padding: 50px 0;
+  }
+
+  .label {
+    padding-top: 0;
+  }
+
+  .shot {
+    max-width: 240px;
+  }
+
+  .facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .skills {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  /* the links are hidden until the Menu button is clicked */
+  .links {
+    display: none;
+    position: absolute;
+    top: 62px;
+    right: 22px;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px 24px;
+    background-color: var(--card);
+    border: 1px solid var(--line);
+  }
+
+  .links.show {
+    display: flex;
+  }
+}
+
+/* ---- 15. If the user turned off animations ---- */
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  * {
+    transition: none !important;
+  }
+
+  .wipe {
+    clip-path: none;
+    transform: none;
+  }
+
+  .char {
+    opacity: 1;
+    transform: none;
+  }
+
+  .curtain {
+    display: none;
+  }
+}
